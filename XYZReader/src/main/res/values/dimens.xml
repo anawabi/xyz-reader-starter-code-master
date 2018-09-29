@@ -9,5 +9,7 @@
     <dimen name="fab_margin">24dp</dimen>
 
     <dimen name="appbar_elevation">8dp</dimen>
+    <dimen name="collapsingtoolbar_height">200dp</dimen>
+    <dimen name="toolbar_container_height">112dp</dimen>
 
 </resources>
