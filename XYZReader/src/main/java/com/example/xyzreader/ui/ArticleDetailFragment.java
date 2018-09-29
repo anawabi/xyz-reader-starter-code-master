@@ -154,7 +154,7 @@ public class ArticleDetailFragment extends Fragment implements
         TextView titleView = mRootView.findViewById(R.id.article_title);
         TextView bylineView = mRootView.findViewById(R.id.article_byline);
         bylineView.setMovementMethod(new LinkMovementMethod());
-//        TextView bodyView = mRootView.findViewById(R.id.article_body);
+        TextView bodyView = mRootView.findViewById(R.id.article_body);
         ImageView mArticlePoster = mRootView.findViewById(R.id.article_poster_iv);
         LinearLayout mAppBarLayout = mRootView.findViewById(R.id.meta_bar);
 
@@ -187,26 +187,20 @@ public class ArticleDetailFragment extends Fragment implements
                                 + "</font>"));
 
             }
-//            bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).replaceAll("(\r\n|\n)", "<br />")));
+            bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).substring(0, 2000)
+                    .replaceAll("(\r\n|\n)", "<br />")));
             String sPosterUrl = mCursor.getString(ArticleLoader.Query.PHOTO_URL);
             Picasso.with(getActivity())
                     .load(sPosterUrl)
                     .placeholder(R.drawable.empty_detail)
                     .error(R.drawable.empty_detail)
                     .into(mArticlePoster);
-//                            PicassoPalette.with(sPosterUrl, mArticlePoster)
-//                                    .use(PicassoPalette.Profile.MUTED_DARK)
-//                                    .intoBackground(mAppBarLayout)
-//
-//                                    .use(PicassoPalette.Profile.VIBRANT)
-//                                    .intoBackground(mAppBarLayout, PicassoPalette.Swatch.RGB)
-//                    );
 
         } else {
             mRootView.setVisibility(View.GONE);
             titleView.setText("N/A");
             bylineView.setText("N/A" );
-//            bodyView.setText("N/A");
+            bodyView.setText("N/A");
         }
     }
 

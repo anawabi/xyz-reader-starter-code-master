@@ -26,7 +26,6 @@
     <color name="white">#fff</color>
     <color name="transparent">#00ffffff</color>
     <color name="medgray">#9E9E9E</color>
-    <color name="primary_dark_material_dark">#D84315</color>
-    <color name="primary_material_dark">#D84315</color>
-    <color name="accent_material_light">#FD5621</color>
+    <color name="drkgray">#393939</color>
+   <color name="text_primary">#000</color>
 </resources>

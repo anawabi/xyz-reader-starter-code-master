@@ -32,6 +32,7 @@ public class ArticleDetailActivity extends AppCompatActivity
     private Cursor mCursor;
     private long mStartId;
     private int mSelectedPage;
+    public String CURRENT_ITEM_POSITION= "current_item_position";
 //    private long mSelectedItemId;
 //    private int mSelectedItemUpButtonFloor = Integer.MAX_VALUE;
 ////    private int mTopInset;
@@ -61,6 +62,14 @@ public class ArticleDetailActivity extends AppCompatActivity
                 }
             }
         });
+        if (savedInstanceState == null) {
+            if (getIntent() != null && getIntent().getData() != null) {
+                Bundle bundle = getIntent().getExtras();
+                mSelectedPage = bundle.getInt(getString(R.string.current_item_position));
+            }
+        } else {
+            mSelectedPage = savedInstanceState.getInt(getString(R.string.current_item_position));
+        }
 //
 //        mUpButtonContainer = findViewById(R.id.up_container);
 //
@@ -92,6 +101,11 @@ public class ArticleDetailActivity extends AppCompatActivity
 //                mSelectedItemId = mStartId;
 //            }
 //        }
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(getString(R.string.current_item_position), mSelectedPage);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -169,7 +183,12 @@ public class ArticleDetailActivity extends AppCompatActivity
 
         @Override
         public int getCount() {
-            return (mCursor != null) ? mCursor.getCount() : 0;
+            if (mCursor !=null) {
+                return mCursor.getCount();
+            }else {
+                return 0;
+            }
+
         }
     }
 }

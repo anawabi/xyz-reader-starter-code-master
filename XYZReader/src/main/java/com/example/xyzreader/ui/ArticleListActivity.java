@@ -61,13 +61,8 @@ public class ArticleListActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_article_list);
 
         mToolbar = findViewById(R.id.toolbar);
-
-
-
 //        final View toolbarContainerView = findViewById(R.id.toolbar_container);
-
         mSwipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
-
         mRecyclerView = findViewById(R.id.recycler_view);
         getLoaderManager().initLoader(0, null, this);
 
@@ -150,8 +145,10 @@ public class ArticleListActivity extends AppCompatActivity implements
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(Intent.ACTION_VIEW,
-                            ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
+                    Intent intent = new Intent(new Intent(Intent.ACTION_VIEW,
+                            ItemsContract.Items.buildItemUri(vh.getAdapterPosition())));
+                    intent.putExtra(getString(R.string.current_item_position), vh.getAdapterPosition());
+                    startActivity(intent);
                 }
             });
             return vh;
@@ -194,10 +191,6 @@ public class ArticleListActivity extends AppCompatActivity implements
                     .placeholder(R.drawable.empty_detail)
                     .error(R.drawable.empty_detail)
                     .into(holder.thumbnailView);
-//            holder.thumbnailView.setImageUrl(
-//                    mCursor.getString(ArticleLoader.Query.THUMB_URL),
-//                    ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader());
-//            holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
         }
 
         @Override
